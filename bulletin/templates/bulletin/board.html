@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{%extends 'bulletin/tempExtendLayout'%}
+{%block content%}
+
+<!--board html-->
+
+<head>
+    <meta charset="UTF-8">
+    {% comment %} <meta http-equiv="X-UA-Compatible" content="IE=edge"> {% endcomment %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    
+    <title>MyPetDiary</title>
+</head>
+<style>
+    .main_body{
+      display: flex; 
+      justify-content: center; 
+      padding-top: 100px;
+      background-color: white;
+    }
+    .left_body{
+      background-color: whitesmoke;
+      margin-right: 20px; 
+      margin-left: 20px; 
+      margin-top: 10px; 
+      margin-bottom: 10px;
+      height: 500px; 
+    }
+  </style>
+
+<body>
+    <div class="left_body">
+        <div class="container">
+            <br>
+            <h1 class="text-center"><a href="#">MyPetDiary Bulletin</a></h1>
+            <br>
+            <table class = "table table-hover table-striped text-center" style="border: 1px solid;">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>글쓴이</th>
+                        <th>시간</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for feed in feed_list%}
+                    <tr>
+                        <td>{{feed.id}}</td>
+                        <td>{{feed.title}}</td>
+                        <td>{{feed.user}}</td>
+                        <td>{{feed.upload_time}}</td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+
+            <hr>
+            <div>
+                <ul class="pagination justify-content-center">                    
+                    {%for page in pages%}
+                    <li><a href="#" style="margin-right:5px;" class="text-secondary">{{page}}</a></li>
+                    {%endfor%}                    
+                </ul>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</body>
+
+{%endblock%}
+</html>
