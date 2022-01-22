@@ -1,11 +1,21 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import BulletinFeed
 # Create your views here.
 def board(request):
-    feed_list = BulletinFeed.objects.all()
-    pages = [1,2,3,4,5]
-    return render(request, 'bulletin/board.html',{'feed_list':feed_list, 'pages':pages})
+    feeds = BulletinFeed.objects.all().order_by('-id')
+    page      = int(request.GET.get('page', 1))
+    paginator = Paginator(feeds, 6)
+    try:
+        boards = paginator.page(page)
+    except PageNotAnInteger:
+        #N/A input, deliver first page
+        boards = paginator.page(1)
+    except EmptyPage:
+        #larger than range, deliver last page
+        boards = paginator.page(paginator.num_pages)
+    return render(request, 'bulletin/board.html',{'boards':boards})
 
 
 # def feed(request, feed_id):
