@@ -4,5 +4,5 @@ from . import views
 app_name = 'bulletin'
 urlpatterns = [
     path('', views.board),
-#    path('<int:feed_id>/', views.feed),
+    path('feed/<int:feed_id>/', views.feed),
 ]

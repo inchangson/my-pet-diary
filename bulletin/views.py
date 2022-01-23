@@ -18,6 +18,6 @@ def board(request):
     return render(request, 'bulletin/board.html',{'boards':boards})
 
 
-# def feed(request, feed_id):
-#     dest = f'{feed_id}' + '의 게시물'
-#     return HttpResponse(dest)
+def feed(request, feed_id):
+    feed = BulletinFeed.objects.get(id = feed_id)
+    return render(request, 'bulletin/feed.html', {'feed':feed})
