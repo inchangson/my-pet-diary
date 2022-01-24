@@ -30,64 +30,48 @@
         height: 2px; 
         background-color: lightgrey;
     }
-    .buffer{
-        height: 0px; 
-    }
-    .feed-right {
-        float: right!important;
-    }
-    .feed-btn {
-        border: none;
-        display: inline-block;
-        padding: 8px 16px;
-        vertical-align: middle;
-        overflow: hidden;
-        text-decoration: none;
-        color: inherit;
-        background-color: inherit;
-        text-align: center;
-        cursor: pointer;
-        white-space: nowrap;
-    }
   </style>
 
 <body>
     <div class="main_body">
         <div class="container">
             <br>
-            
-            <button type="button" class="btn btn-default pull-right" onclick="location.href='../' ">
-                <b>📜목록</b>
-            </button>
-            <button type="button" class="btn btn-default pull-right" onclick="location.href='../upload/' ">
-                <b>✋글쓰기</b>
-            </button>
-            <br>
-            <br>
-            <div class="contour"></div>
-            <br>
-            <b style="font-size:35px">{{feed.title}}</b>
-            <div class="buffer"></div>
-            <button type="button" aria-label="Left Align">
-                <b>작성자:  
-                    {% if not feed.user.name %}
-                        알 수 없음
-                    {% else %}
-                        {{feed.user.name}}
-                    {% endif %}
-                </b>                
-            </button>
-            <div style="height: 0px; background-color: black"></div>
-            <p> time: {{feed.upload_time}}</p>
-            <div class="contour"></div>
-            <br><br>
+            <div>
+                <button type="button" class="btn btn-default pull-right" onclick="location.href='../' ">
+                    <b>📜목록</b>
+                </button>
+                <button type="button" class="btn btn-default pull-right" onclick="location.href='../upload/' ">
+                    <b>✋글쓰기</b>
+                </button>
+            </div>
+
+            <div>
+                <br><br>
+                <div class="contour"></div>
+                <br>
+                <b style="font-size:35px">{{feed.title}}</b>
+                <div></div>
+                <button type="button" aria-label="Left Align">
+                    <b>작성자:  
+                        {% if not feed.user.name %}
+                            알 수 없음
+                        {% else %}
+                            {{feed.user.name}}
+                        {% endif %}
+                    </b>                
+                </button>
+                <div style="height: 0px; background-color: black"></div>
+                <p> time: {{feed.upload_time}}</p>
+                <div class="contour"></div>
+                <br><br>
                 <p>
                     {% if not feed.content %}
                         내용 없음
                     {% else %}
                         {{feed.content}}
                     {% endif %}
-                </p>            
+                </p>  
+            </div>          
         </div>
     </div>
 

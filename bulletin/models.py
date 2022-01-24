@@ -20,7 +20,3 @@ class BulletinFeed(models.Model):
     
     img_path    = models.CharField(max_length=255,  null=True)
     user        = models.ForeignKey(TempUser, on_delete=models.SET_NULL, null = True)
-
-
-
-
