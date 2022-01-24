@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{%extends 'bulletin/tempExtendLayout'%}
+{%extends 'bulletin/tempExtendLayout.html'%}
 {%block content%}
 
 <!--board html-->
@@ -40,7 +40,7 @@
         <div class="container">
             <br>
             <h1 class="text-center"><a href="">📌자유 게시판</a>
-                <button type="button" class="btn btn-default pull-right">
+                <button type="button" class="btn btn-default pull-right" onclick="location.href='upload/' ">
                     <b>✋글쓰기</b>
                 </button>
             </h1>
@@ -58,8 +58,8 @@
                     {% for board in boards%}
                     <tr>
                         <td>{{board.id}}</td>
-                        <td><a href="./feed/{{board.id}}">{{board.title}}</a></td>
-                        <td>{{board.user}}</td>
+                        <td><a href="./{{board.id}}"><b>{{board.title}}</b></a></td>
+                        <td>{{board.user.name}}</td>
                         <td>{{board.upload_time}}</td>
                     </tr>
                     {%endfor%}

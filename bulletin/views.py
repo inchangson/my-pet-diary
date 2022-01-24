@@ -1,7 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import BulletinFeed
+from .models import BulletinFeed, TempUser
+from .forms import BulletinFeedForm
+from django.utils import timezone
+
 # Create your views here.
 def board(request):
     feeds = BulletinFeed.objects.all().order_by('-id')
@@ -19,5 +22,32 @@ def board(request):
 
 
 def feed(request, feed_id):
-    feed = BulletinFeed.objects.get(id = feed_id)
+    # feed = BulletinFeed.objects.get(id = feed_id)
+    feed = get_object_or_404(BulletinFeed, id = feed_id)
     return render(request, 'bulletin/feed.html', {'feed':feed})
+
+
+import random, string
+def make_tmp_name():
+    result = 'usr' + str(random.randrange(100, 1000))
+    return result
+
+# from django.views.decorators.csrf import csrf_exempt
+# @csrf_exempt
+def upload(request):
+    if request.method == "POST":
+        form = BulletinFeedForm(request.POST)
+        if form.is_valid():
+            feed = form.save(commit=False)
+            feed.upload_time = timezone.now()
+            
+            tmpUser = TempUser()
+            tmpUser.name = make_tmp_name()
+            tmpUser.save()
+            feed.user = tmpUser
+
+            feed.save()
+            return redirect("../")
+    else:
+        form = BulletinFeedForm()
+    return render(request, 'bulletin/upload.html', {'form':form})
