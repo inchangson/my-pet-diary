@@ -55,12 +55,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for board in boards%}
+                    {% for feed in board%}
                     <tr>
-                        <td>{{board.id}}</td>
-                        <td><a href="./{{board.id}}"><b>{{board.title}}</b></a></td>
-                        <td>{{board.user.name}}</td>
-                        <td>{{board.upload_time}}</td>
+                        <td>{{feed.id}}</td>
+                        <td><a href="./{{feed.id}}"><b>{{feed.title}}</b></a></td>
+                        <td>{{feed.user.name}}</td>
+                        <td>{{feed.upload_time}}</td>
                     </tr>
                     {%endfor%}
                 </tbody>

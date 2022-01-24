@@ -8,17 +8,16 @@ from django.utils import timezone
 # Create your views here.
 def board(request):
     feeds = BulletinFeed.objects.all().order_by('-id')
-    page      = int(request.GET.get('page', 1))
-    paginator = Paginator(feeds, 6)
-    try:
-        boards = paginator.page(page)
-    except PageNotAnInteger:
-        #N/A input, deliver first page
-        boards = paginator.page(1)
-    except EmptyPage:
-        #larger than range, deliver last page
-        boards = paginator.page(paginator.num_pages)
-    return render(request, 'bulletin/board.html',{'boards':boards})
+    current_page      = int(request.GET.get('page', 1))
+    paginator = Paginator(feeds, 5)
+    
+    last_page = paginator.num_pages
+    current_page = min(current_page, last_page)
+    start_page = (current_page - 1) // 10 * 10 + 1
+    end_page = min(start_page + 9, last_page)
+
+    board = paginator.page(current_page)
+    return render(request, 'bulletin/board.html',{'board':board, 'page_range' : range(start_page, end_page + 1)})
 
 
 def feed(request, feed_id):
