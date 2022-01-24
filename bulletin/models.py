@@ -4,6 +4,7 @@ from sqlalchemy import null
 
 # Create your models here.
 
+#임시 사용자 객체
 class TempUser(models.Model):
 #    id = models.IntegerField(primary_key=True)
     name        = models.CharField(max_length=15, null=True)
